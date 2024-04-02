@@ -98,6 +98,8 @@ class PriorityQueue:
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
+                else: 
+                    print(current.owner.name + " could not park here")
             time.sleep(2)
             clear()
             current = current.next
@@ -153,7 +155,7 @@ class RegularQueue:
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot")
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
-                elif current.owner.parking_credits == 0:
+                else: 
                     print(current.owner.name + " could not park here")
             time.sleep(2)
             clear()
