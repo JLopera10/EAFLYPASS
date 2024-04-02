@@ -95,6 +95,7 @@ class PriorityQueue:
                     answer = input()
                     valid = current.owner.addCredit(answer)
                 if current.owner.parking_credits >= 1:
+                    current.owner.useCredit()
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
