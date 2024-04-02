@@ -68,7 +68,9 @@ class PriorityQueue:
     def parkCars(self):
         current = self.front
         if not current:
-            print("There is no cars in the priority queue")
+            print("There are no cars in the priority queue")
+            time.sleep(1)
+            clear()
         while current:
             if current.owner.parking_credits > 1:
                 current.owner.useCredit()
@@ -126,6 +128,8 @@ class RegularQueue:
         current = self.front
         if not current:
             print("There are no cars in the regular queue")
+            time.sleep(1)
+            clear()
         while current:
             if current.owner.parking_credits > 1:
                 current.owner.useCredit()
