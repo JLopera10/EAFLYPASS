@@ -1,19 +1,53 @@
 import time
-from Modulo import Student, Car, PriorityQueue, RegularQueue, clear
+import random
+from Modulo import Student, Car, Queue, clear
 
-priorityqueue = PriorityQueue()
-regularqueue = RegularQueue()
+priorityqueue = Queue("priority")
+regularqueue = Queue("regular")
 creationqueue = []
-arrivalqueue = []
+
+# DEFAULT STUDENTS
+student1 = Student("Juan", 1022144846, "Priority")
+car1 = Car(student1, "XYZ-215")
+student2 = Student("Luis", 3535983705, "Priority")
+car2 = Car(student2, "JUM-543")
+student3 = Student("Camilo", 6042112631, "Priority")
+car3 = Car(student3, "KLO-326")
+student4 = Student("Cesar", 8032174243, "Regular")
+car4 = Car(student4, "WLU-580")
+student5 = Student("Isabella", 9022645811, "Regular")
+car5 = Car(student5, "JQM-345")
+student6 = Student("Alejandra", 2327194646, "Regular")
+car6 = Car(student6, "QLP-328")
+student7 = Student("Sebastian", 9221193542, "Regular")
+car7 = Car(student7, "WMU-362")
+creationqueue.append(car1)
+creationqueue.append(car2)
+creationqueue.append(car3)
+creationqueue.append(car4)
+creationqueue.append(car5)
+creationqueue.append(car6)
+creationqueue.append(car7)
+
+
+def randomizeArrival(random_numbers):
+    total = random.randint(0, len(creationqueue) - 1)
+    for i in range(total):
+        found = True
+        while found:
+            num = random.randint(0, len(creationqueue) - 1)
+            if num not in random_numbers:
+                found = False
+                random_numbers.append(num)
+
 
 clear()
 leave = False
 while not leave:
     print("--------------------- EAFLYPASS Parking Lot ---------------------")
     print("1. Add student to the system")
-    print("2. Add car to the queue")
-    print("3. Park cars")
-    print("4. Leave")
+    print("2. Park cars")
+    print("3. Leave")
     decision = input()
     clear()
     match decision:
@@ -39,37 +73,16 @@ while not leave:
             time.sleep(1)
             clear()
         case "2":
-            i = 1
-            for x in creationqueue:
-                if x not in arrivalqueue:
-                    print(str(i) + ". " + x.owner.name)
-                    print("Category: " + x.owner.category)
-                    print()
-                i += 1
-            index = int(input("Who is gonna join the queue?: "))
-            if 0 <= index - 1 < len(creationqueue):
-                if creationqueue[index - 1] not in arrivalqueue:
-                    arrivalqueue.append(creationqueue[index - 1])
-                    print("Car added successfully to the queue")
-                else:
-                    print("This car is already in the queue")
-            else:
-                print("Invalid index")
-            time.sleep(1)
-            clear()
-        case "3":
-            for x in arrivalqueue:
-                if x.owner.category == "Priority":
-                    priorityqueue.addCar(x)
-                elif x.owner.category == "Regular":
-                    regularqueue.addCar(x)
+            random_numbers = []
+            randomizeArrival(random_numbers)
+            for x in random_numbers:
+                if creationqueue[x].owner.category == "Priority":
+                    priorityqueue.addCar(creationqueue[x])
+                elif creationqueue[x].owner.category == "Regular":
+                    regularqueue.addCar(creationqueue[x])
             priorityqueue.parkCars()
             regularqueue.parkCars()
-            arrivalqueue.clear()
-            print("All cars have been parked successfully, the queue is now empty")
-            time.sleep(2)
-            clear()
-        case "4":
+        case "3":
             print("Leaving...")
             quit()
         case _:
