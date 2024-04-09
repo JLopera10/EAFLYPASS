@@ -36,7 +36,7 @@ while not leave:
                 car = Car(student, plate)
                 creationqueue.append(car)
                 print("Student Added Correctly")
-            time.sleep(2)
+            time.sleep(1)
             clear()
         case "2":
             i = 1
@@ -55,7 +55,7 @@ while not leave:
                     print("This car is already in the queue")
             else:
                 print("Invalid index")
-            time.sleep(2)
+            time.sleep(1)
             clear()
         case "3":
             for x in arrivalqueue:
@@ -67,18 +67,10 @@ while not leave:
             regularqueue.parkCars()
             arrivalqueue.clear()
             print("All cars have been parked successfully, the queue is now empty")
-            time.sleep(4)
+            time.sleep(2)
             clear()
         case "4":
             print("Leaving...")
             quit()
         case _:
             print("Invalid Input")
-
-
-
-
-
-
-
-
