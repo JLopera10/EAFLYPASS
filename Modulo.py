@@ -51,10 +51,11 @@ class Car:
         self.next = None
 
 
-class PriorityQueue:
-    def __init__(self):
+class Queue:
+    def __init__(self, type):
         self.front = None
         self.rear = None
+        self.type = type
 
     def addCar(self, car: Car):
         car.next = None
@@ -68,72 +69,17 @@ class PriorityQueue:
     def parkCars(self):
         current = self.front
         if not current:
-            print("There are no cars in the priority queue")
-            time.sleep(1)
-            clear()
-        while current:
-            if current.owner.parking_credits > 1:
-                current.owner.useCredit()
-                print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
-                print("Vehicle Registration Plate: " + current.license_plate)
-                print("Remaining Credits: " + str(current.owner.parking_credits))
-            elif current.owner.parking_credits == 1:
-                current.owner.useCredit()
-                print("************** ALERT **************")
-                valid = False
-                while not valid:
-                    print(current.owner.name + ", you have wasted your last credit. "
-                                               "Do you want to add more credits? ( Y / N )")
-                    answer = input()
-                    valid = current.owner.addCredit(answer)
-                print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
-                print("Vehicle Registration Plate: " + current.license_plate)
-                print("Remaining Credits: " + str(current.owner.parking_credits))
-            else:
-                valid = False
-                while not valid:
-                    print(current.owner.name + ", you don't have enough credits to park here. "
-                                               "Do you want to add more credits? ( Y / N )")
-                    answer = input()
-                    valid = current.owner.addCredit(answer)
-                if current.owner.parking_credits >= 1:
-                    current.owner.useCredit()
-                    print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
-                    print("Vehicle Registration Plate: " + current.license_plate)
-                    print("Remaining Credits: " + str(current.owner.parking_credits))
-                else:
-                    print(current.owner.name + " could not park here")
-            time.sleep(1)
-            clear()
-            current = current.next
-        self.front = None
-        self.rear = None
-
-
-class RegularQueue:
-    def __init__(self):
-        self.front = None
-        self.rear = None
-
-    def addCar(self, car: Car):
-        car.next = None
-        if not (self.front and self.rear):
-            self.front = car
-            self.rear = car
-        else:
-            self.rear.next = car
-            self.rear = car
-
-    def parkCars(self):
-        current = self.front
-        if not current:
-            print("There are no cars in the regular queue")
+            if self.type == "priority":
+                print("There are no cars in the priority queue")
+            elif self.type == "regular":
+                print("There are no cars in the regular queue")
             time.sleep(1)
             clear()
         while current:
             if current.owner.parking_credits > 1:
                 current.owner.useCredit()
                 print(current.owner.name + " welcome to the EAFLYPASS parking lot")
+                print("Category: " + current.owner.category)
                 print("Vehicle Registration Plate: " + current.license_plate)
                 print("Remaining Credits: " + str(current.owner.parking_credits))
             elif current.owner.parking_credits == 1:
@@ -146,6 +92,7 @@ class RegularQueue:
                     answer = input()
                     valid = current.owner.addCredit(answer)
                 print(current.owner.name + " welcome to the EAFLYPASS parking lot")
+                print("Category: " + current.owner.category)
                 print("Vehicle Registration Plate: " + current.license_plate)
                 print("Remaining Credits: " + str(current.owner.parking_credits))
             else:
@@ -158,6 +105,7 @@ class RegularQueue:
                 if current.owner.parking_credits >= 1:
                     current.owner.useCredit()
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot")
+                    print("Category: " + current.owner.category)
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
                 else:
@@ -167,3 +115,4 @@ class RegularQueue:
             current = current.next
         self.front = None
         self.rear = None
+
