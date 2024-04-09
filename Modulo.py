@@ -27,19 +27,19 @@ class Student:
                     valid = True
                 else:
                     print("Your total amount of credits has to be equal or higher than 5 if you want to add credits")
-                    time.sleep(2)
-            time.sleep(2)
+                    time.sleep(1)
+            time.sleep(1)
             clear()
             return True
         elif answer.lower() == "n":
             print("Alright, just remember you need to have credits to park here")
-            time.sleep(2)
+            time.sleep(1)
             clear()
             return True
         else:
             print("Invalid Answer")
             print(" ")
-            time.sleep(2)
+            time.sleep(1)
             clear()
             return False
 
@@ -101,9 +101,9 @@ class PriorityQueue:
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot, priority user")
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
-                else: 
+                else:
                     print(current.owner.name + " could not park here")
-            time.sleep(2)
+            time.sleep(1)
             clear()
             current = current.next
         self.front = None
@@ -160,9 +160,9 @@ class RegularQueue:
                     print(current.owner.name + " welcome to the EAFLYPASS parking lot")
                     print("Vehicle Registration Plate: " + current.license_plate)
                     print("Remaining Credits: " + str(current.owner.parking_credits))
-                else: 
+                else:
                     print(current.owner.name + " could not park here")
-            time.sleep(2)
+            time.sleep(1)
             clear()
             current = current.next
         self.front = None
